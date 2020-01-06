@@ -20,6 +20,7 @@ routes.use(authMiddleware);
 
 routes.put('/users', UserController.update);
 routes.get('/users', UserController.show);
+routes.delete('/users', UserController.destroy);
 
 routes.post('/tasks', TaskController.store);
 
