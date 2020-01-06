@@ -15,9 +15,10 @@ const upload = multer(uploadConfig);
 routes.post('/users', UserController.store);
 routes.post('/session', SessionController.store);
 
-routes.get('/users', UserController.index);
-
 routes.use(authMiddleware);
+
+routes.put('/users', UserController.update);
+routes.get('/users', UserController.show);
 
 routes.post('/files', upload.single('avatar'), FileController.store);
 
