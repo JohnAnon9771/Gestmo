@@ -4,6 +4,7 @@ import multer from 'multer';
 import UserController from './app/controllers/UserController';
 import FileController from './app/controllers/FileController';
 import SessionController from './app/controllers/SessionController';
+import TaskController from './app/controllers/TaskController';
 
 import uploadConfig from './config/upload';
 
@@ -19,6 +20,8 @@ routes.use(authMiddleware);
 
 routes.put('/users', UserController.update);
 routes.get('/users', UserController.show);
+
+routes.post('/tasks', TaskController.store);
 
 routes.post('/files', upload.single('avatar'), FileController.store);
 

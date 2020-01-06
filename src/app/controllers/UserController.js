@@ -2,6 +2,7 @@ import * as Yup from 'yup';
 
 import User from '../models/User';
 import File from '../models/File';
+import Task from '../models/Task';
 
 class UserController {
   async store(req, res) {
@@ -32,14 +33,19 @@ class UserController {
   }
 
   async show(req, res) {
-    const response = await User.findOne({
-      where: { id: req.userId },
+    const response = await User.findByPk(req.userId, {
       attributes: ['id', 'name', 'email'],
-      include: {
-        model: File,
-        as: 'avatar',
-        attributes: ['url', 'name', 'path']
-      }
+      include: [
+        {
+          model: File,
+          as: 'avatar',
+          attributes: ['url', 'name', 'path']
+        },
+        {
+          attributes: ['id', 'discipline', 'content', 'importance', 'term'],
+          association: 'tasks'
+        }
+      ]
     });
 
     return res.json(response);
