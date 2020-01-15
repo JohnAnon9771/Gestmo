@@ -14,7 +14,6 @@ const routes = Router();
 const upload = multer(uploadConfig);
 
 routes.post('/users', UserController.store);
-// routes.post('/forgotpwd', ForgotPasswordController.store);
 routes.post('/session', SessionController.store);
 
 routes.use(authMiddleware);
