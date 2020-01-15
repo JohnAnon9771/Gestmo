@@ -30,6 +30,28 @@ class TaskController {
 
     return res.json(task);
   }
+
+  async update(req, res) {
+    const schema = Yup.object().shape({
+      discipline: Yup.string(),
+      content: Yup.string(),
+      importance: Yup.string(),
+      term: Yup.date()
+    });
+
+    if (!(await schema.isValid(req.body))) {
+      return res.status(400).json({ error: 'Validations Fails' });
+    }
+
+    const { task_id } = req.params;
+    const task = await Task.findByPk(task_id);
+    if (!task) {
+      return res.status(400).json({ error: 'Task not exist' });
+    }
+    const newTask = await task.update(req.body);
+
+    return res.json(newTask);
+  }
 }
 
 export default new TaskController();

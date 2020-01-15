@@ -14,6 +14,7 @@ const routes = Router();
 const upload = multer(uploadConfig);
 
 routes.post('/users', UserController.store);
+// routes.post('/forgotpwd', ForgotPasswordController.store);
 routes.post('/session', SessionController.store);
 
 routes.use(authMiddleware);
@@ -23,6 +24,7 @@ routes.get('/users', UserController.show);
 routes.delete('/users', UserController.destroy);
 
 routes.post('/tasks', TaskController.store);
+routes.put('/tasks/:task_id', TaskController.update);
 
 routes.post('/files', upload.single('avatar'), FileController.store);
 

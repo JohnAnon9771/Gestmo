@@ -2,7 +2,6 @@ import * as Yup from 'yup';
 
 import User from '../models/User';
 import File from '../models/File';
-import Task from '../models/Task';
 
 class UserController {
   async store(req, res) {
